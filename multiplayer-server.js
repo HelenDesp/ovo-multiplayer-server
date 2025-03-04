@@ -5,6 +5,7 @@ const puppeteer = require("puppeteer");
 
   const browser = await puppeteer.launch({
     headless: true,
+    executablePath: puppeteer.executablePath(),  // <-- Fix Chromium issue
     args: [
       "--no-sandbox",
       "--disable-setuid-sandbox",
