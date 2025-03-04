@@ -1,4 +1,9 @@
-const puppeteer = require("puppeteer");
+const puppeteer = require("puppeteer"); 
+const { execSync } = require("child_process");
+
+// Install Chrome before launching Puppeteer
+execSync("npx puppeteer browsers install chrome", { stdio: "inherit" });
+
 
 (async () => { 
   console.log("🚀 Launching Puppeteer Multiplayer Server...");
