@@ -1,11 +1,18 @@
 const puppeteer = require("puppeteer");
 
 (async () => { 
-  console.log("?? Launching Puppeteer Multiplayer Server...");
+  console.log("?? Installing Chromium before launching Puppeteer...");
 
+  // Ensure Chromium is installed
+  const browserFetcher = puppeteer.createBrowserFetcher();
+  const revisionInfo = await browserFetcher.download('latest');
+
+  console.log("? Chromium installed at:", revisionInfo.executablePath);
+
+  console.log("?? Launching Puppeteer Multiplayer Server...");
   const browser = await puppeteer.launch({
     headless: true,
-    executablePath: process.env.PUPPETEER_EXECUTABLE_PATH || puppeteer.executablePath(),
+    executablePath: revisionInfo.executablePath, // Manually specify the downloaded Chromium
     args: [
       "--no-sandbox",
       "--disable-setuid-sandbox",
